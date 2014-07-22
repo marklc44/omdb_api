@@ -1,0 +1,49 @@
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+}
+header {
+	padding: 2em;
+	overflow: hidden;
+	background: #ddd;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+}
+.logo {
+	float: left;
+	margin-right: 1.5em;
+}
+.nav {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	text-indent: none;
+	float: left;
+}
+.nav li {
+	display: inline-block;
+	margin-right: 1.5em;
+}
+.results {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	text-indent: none;
+}
+.results li {
+	padding: .25em;
+	margin-bottom: .25em;
+	background: #ddd;
+}
+.year {
+	font-style: oblique;
+	font-size: .5em;
+}
+.content {
+	width: 80%;
+	margin: 100px auto 0 auto;
+}

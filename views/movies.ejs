@@ -1,12 +1,8 @@
-
 <h1>Search Results for:</h1>
 <h2><%= query %></h2>
 
-<ul class="results">
+<ul>
 	<% movies.forEach(function(movie, index) { %>
-		<li>
-			<h4><%= movie.Title %> <span class="year"><%= movie.Year %></span></h4>
-		</li>
+		<li><%= movie.Title %></li>
 	<% }) %>
 </ul>
-
