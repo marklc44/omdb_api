@@ -3,7 +3,7 @@
 <h2>"<%= query %>"</h2>
 
 <ul class="results">
-	<% movies.forEach(function(movie, index) { %>
+	<% movies.Search.forEach(function(movie, index) { %>
 		<li>
 			<h4><a href="/movies/<%= movie.imdbID %>"><%= movie.Title %></a> <span class="year"><%= movie.Year %></span></h4>
 			

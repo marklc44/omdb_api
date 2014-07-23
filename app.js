@@ -30,6 +30,29 @@ var favLength = function() {
 	}
 };
 
+var makeRequest = function(type, query, req, res) {
+	request(omdbUrl + type + '=' + query, function(error, response, body) {
+		if(!error && response.statusCode === 200) {
+			var body = JSON.parse(body);
+			if (body.Search) {
+				res.render('results', {
+				movies: body,
+				query: searchQuery,
+				faves: favorites,
+				favLength: favLength()
+			});
+			} else {
+				res.render('results', {
+					movies: [
+						{ Title: 'No movies Found', Year: '' }
+					],
+					faves: favorites
+				});
+			}
+		}
+	});
+};
+
 // Routes
 app.get('/', function(req, res){
   res.render('index');
@@ -38,51 +61,13 @@ app.get('/', function(req, res){
 app.get('/search', function(req, res) {
 	searchQuery = req.query.searchTerm;
 
-	request(omdbUrl + 's=' + searchQuery, function(error, response, body) {
-		if(!error && response.statusCode === 200) {
-			var body = JSON.parse(body);
-			if (body.Search) {
-				res.render('results', {
-				movies: body.Search,
-				query: searchQuery,
-				faves: favorites,
-				favLength: favLength()
-			});
-			} else {
-				res.render('results', {
-					movies: [
-						{ Title: 'No movies Found', Year: '' }
-					],
-					faves: favorites
-				});
-			}
-		}
-	});
+	makeRequest('s', searchQuery, req, res);
 
 });
 
 app.get('/results', function(req, res) {
 
-	request(omdbUrl + 's=' + searchQuery, function(error, response, body) {
-		if(!error && response.statusCode === 200) {
-			var body = JSON.parse(body);
-			if (body.Search) {
-				res.render('results', {
-				movies: body.Search,
-				query: searchQuery,
-				faves: favorites,
-				favLength: favLength()
-			});
-			} else {
-				res.render('results', {
-					movies: [
-						{ Title: 'No movies Found', Year: '' }
-					],
-					faves: favorites
-				});
-			}
-		}
-	});
+	makeRequest('s', searchQuery, req, res);	
 
 });
 
