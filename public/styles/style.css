@@ -82,4 +82,21 @@ header {
 	margin-bottom: 1.5em;
 }
 
+.favorite {
+	appearance: none;
+	background: url(../images/stars.png) top left no-repeat;
+	width: 38px;
+	height: 36px;
+	border: none;
+	cursor: pointer;
+}
+.unfavorite {
+	appearance: none;
+	background: url(../images/stars.png) -37px 0px   no-repeat;
+	width: 38px;
+	height: 36px;
+	border: none;
+	cursor: pointer;
+}
+
 

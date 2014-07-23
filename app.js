@@ -22,6 +22,13 @@ var omdbUrl = 'http://www.omdbapi.com/?';
 var favorites = [];
 
 // Utils
+var favLength = function() {
+	if (favorites.length > 0) {
+		return true;
+	} else {
+		return false;
+	}
+};
 
 // Routes
 app.get('/', function(req, res){
@@ -38,7 +45,8 @@ app.get('/search', function(req, res) {
 				res.render('results', {
 				movies: body.Search,
 				query: searchQuery,
-				faves: favorites
+				faves: favorites,
+				favLength: favLength()
 			});
 			} else {
 				res.render('results', {
@@ -62,7 +70,8 @@ app.get('/results', function(req, res) {
 				res.render('results', {
 				movies: body.Search,
 				query: searchQuery,
-				faves: favorites
+				faves: favorites,
+				favLength: favLength()
 			});
 			} else {
 				res.render('results', {
@@ -88,7 +97,8 @@ app.get('/movies/:id', function(req, res) {
 			if (body) {
 				res.render('show', {
 				movie: body,
-				faves: favorites
+				faves: favorites,
+				favLength: favLength()
 			});
 			} else {
 				res.render('show', {
