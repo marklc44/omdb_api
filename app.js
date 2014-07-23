@@ -37,7 +37,7 @@ var makeRequest = function(type, query, req, res) {
 			if (body.Search) {
 				res.render('results', {
 				movies: body,
-				query: searchQuery,
+				query: query,
 				faves: favorites,
 				favLength: favLength()
 			});
@@ -75,6 +75,8 @@ app.get('/results', function(req, res) {
 // get with request to title
 app.get('/movies/:id', function(req, res) {
 	idQuery = req.params.id;
+
+	makeRequest('i', idQuery, req, res);
 
 	request(omdbUrl + 'i=' + idQuery, function(error, response, body) {
 		if(!error && response.statusCode === 200) {
