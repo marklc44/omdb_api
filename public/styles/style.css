@@ -76,5 +76,10 @@ header {
 	background: #999;
 	border: 1px solid #666;
 }
+.back {
+	text-decoration: none;
+	display: block;
+	margin-bottom: 1.5em;
+}
 
 

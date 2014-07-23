@@ -16,16 +16,12 @@ app.use(bodyParser.urlencoded());
 app.use(methodOverride('_method'));
 
 // Data
-var query;
+var searchQuery;
+var idQuery;
 var omdbUrl = 'http://www.omdbapi.com/?';
 var favorites = [];
 
 // Utils
-var showFav = function(movieID) {
-	if (favorites.length > 0) {
-
-	}
-};
 
 // Routes
 app.get('/', function(req, res){
@@ -33,23 +29,46 @@ app.get('/', function(req, res){
 });
 
 app.get('/search', function(req, res) {
-	query = req.query.searchTerm;
+	searchQuery = req.query.searchTerm;
 
-	request(omdbUrl + 's=' + query, function(error, response, body) {
+	request(omdbUrl + 's=' + searchQuery, function(error, response, body) {
 		if(!error && response.statusCode === 200) {
 			var body = JSON.parse(body);
 			if (body.Search) {
 				res.render('results', {
 				movies: body.Search,
-				query: query,
+				query: searchQuery,
 				faves: favorites
 			});
 			} else {
 				res.render('results', {
 					movies: [
 						{ Title: 'No movies Found', Year: '' }
-					], 
-					query: query,
+					],
+					faves: favorites
+				});
+			}
+		}
+	});
+
+});
+
+app.get('/results', function(req, res) {
+
+	request(omdbUrl + 's=' + searchQuery, function(error, response, body) {
+		if(!error && response.statusCode === 200) {
+			var body = JSON.parse(body);
+			if (body.Search) {
+				res.render('results', {
+				movies: body.Search,
+				query: searchQuery,
+				faves: favorites
+			});
+			} else {
+				res.render('results', {
+					movies: [
+						{ Title: 'No movies Found', Year: '' }
+					],
 					faves: favorites
 				});
 			}
@@ -61,12 +80,11 @@ app.get('/search', function(req, res) {
 
 // get with request to title
 app.get('/movies/:id', function(req, res) {
-	query = req.params.id;
+	idQuery = req.params.id;
 
-	request(omdbUrl + 'i=' + query, function(error, response, body) {
+	request(omdbUrl + 'i=' + idQuery, function(error, response, body) {
 		if(!error && response.statusCode === 200) {
 			var body = JSON.parse(body);
-			console.log("FAVORITES ", favorites);
 			if (body) {
 				res.render('show', {
 				movie: body,
@@ -76,8 +94,7 @@ app.get('/movies/:id', function(req, res) {
 				res.render('show', {
 					movie: [
 						{ Title: 'No movies Found', Year: '' }
-					], 
-					query: query
+					]
 				});
 			}
 		}
@@ -91,7 +108,6 @@ app.post('/favorites', function(req, res) {
 });
 
 app.get('/favorites', function(req, res) {
-	console.log(favorites);
 	res.render('favorites', { faves: favorites });
 });
 
