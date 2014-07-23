@@ -2,10 +2,15 @@
 <h1>Search Results for:</h1>
 <h2><%= query %></h2>
 
+<p><%= faves %></p>
+
 <ul class="results">
 	<% movies.forEach(function(movie, index) { %>
 		<li>
 			<h4><a href="/movies/<%= movie.imdbID %>"><%= movie.Title %></a> <span class="year"><%= movie.Year %></span></h4>
+			
+			<%- include partials/checkFavs.ejs %>
+
 		</li>
 	<% }) %>
 </ul>

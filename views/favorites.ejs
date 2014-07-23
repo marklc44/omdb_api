@@ -3,8 +3,10 @@
 <ul class="results">
 	<% faves.forEach(function(movie, index) { %>
 		<li>
-			<h4><a href="/movies/<%= movie.id %>"><%= movie.title %></a> </h4>
-			<form method="post" action=""></form>
+			<h4><%= movie.title %></h4>
+			<form method="post" action="/favorites/<%= movie.id %>?_method=delete">
+				<input type="submit" value="Unfavorite">
+			</form>
 		</li>
 	<% }) %>
 </ul>

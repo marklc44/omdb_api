@@ -13,12 +13,21 @@ app.set('view engine', 'ejs');
 app.use(expressLayouts);
 app.use('/public', express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded());
+app.use(methodOverride('_method'));
 
 // Data
 var query;
 var omdbUrl = 'http://www.omdbapi.com/?';
 var favorites = [];
 
+// Utils
+var showFav = function(movieID) {
+	if (favorites.length > 0) {
+
+	}
+};
+
+// Routes
 app.get('/', function(req, res){
   res.render('index');
 });
@@ -32,14 +41,16 @@ app.get('/search', function(req, res) {
 			if (body.Search) {
 				res.render('results', {
 				movies: body.Search,
-				query: query
+				query: query,
+				faves: favorites
 			});
 			} else {
 				res.render('results', {
 					movies: [
 						{ Title: 'No movies Found', Year: '' }
 					], 
-					query: query
+					query: query,
+					faves: favorites
 				});
 			}
 		}
@@ -47,17 +58,19 @@ app.get('/search', function(req, res) {
 
 });
 
+
 // get with request to title
 app.get('/movies/:id', function(req, res) {
 	query = req.params.id;
-	console.log(query);
 
 	request(omdbUrl + 'i=' + query, function(error, response, body) {
 		if(!error && response.statusCode === 200) {
 			var body = JSON.parse(body);
+			console.log("FAVORITES ", favorites);
 			if (body) {
 				res.render('show', {
-				movie: body
+				movie: body,
+				faves: favorites
 			});
 			} else {
 				res.render('show', {
@@ -73,16 +86,25 @@ app.get('/movies/:id', function(req, res) {
 });
 
 app.post('/favorites', function(req, res) {
-	favorites.push(req.body.movie);
+	favorites.push(req.body.favorite);
 	res.redirect('/favorites');
 });
 
 app.get('/favorites', function(req, res) {
+	console.log(favorites);
 	res.render('favorites', { faves: favorites });
 });
 
-app.delete('/favorites', function(req, res) {
-
+app.delete('/favorites/:id', function(req, res) {
+	var id = req.params.id;
+	var favsIndex;
+  favorites.forEach(function(fav, index){
+     if(fav.id === id) {
+       favsIndex = index;
+     }
+  });
+  favorites.splice(favsIndex, 1);
+  res.redirect('/favorites');
 });
 
 

@@ -1,0 +1,30 @@
+<% if (faves.length > 0 ) { %>
+
+	<% faves.forEach(function(fav, index) {
+		if (fav.id === movie.imdbID) { %>
+
+			<form method="post" action="/favorites/<%= movie.id %>?_method=delete">
+				<input type="submit" value="Unfavorite">
+			</form>
+
+		<% } else { %>
+
+			<form method="post" action="/favorites">
+				<input type="hidden" name="favorite[title]" value="<%= movie.Title %>">
+				<input type="hidden" name="favorite[id]" value="<%= movie.imdbID %>">
+				<input type="submit" value="Favorite">
+			</form>
+
+		<% }
+
+	}); %>
+
+<% } else { %>
+
+		<form method="post" action="/favorites">
+			<input type="hidden" name="favorite[title]" value="<%= movie.Title %>">
+			<input type="hidden" name="favorite[id]" value="<%= movie.imdbID %>">
+			<input type="submit" value="Favorite">
+		</form>
+
+<% } %>
