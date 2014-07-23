@@ -5,7 +5,7 @@
 <ul class="results">
 	<% movies.forEach(function(movie, index) { %>
 		<li>
-			<h4><%= movie.Title %> <span class="year"><%= movie.Year %></span></h4>
+			<h4><a href="/movies/<%= movie.imdbID %>"><%= movie.Title %></a> <span class="year"><%= movie.Year %></span></h4>
 		</li>
 	<% }) %>
 </ul>

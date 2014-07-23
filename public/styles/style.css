@@ -47,3 +47,34 @@ header {
 	width: 80%;
 	margin: 100px auto 0 auto;
 }
+
+/*
+	Show
+*/
+
+.result {
+	overflow: hidden;
+	width: 100%;
+}
+.result img {
+	width: 25%;
+	float: left;
+	margin-right: 5%;
+}
+.result .meta {
+	font-style: oblique;
+	color: #777;
+}
+.result .text {
+	width: 70%;
+	float: left;
+}
+
+.button {
+	width: auto;
+	padding: .5em;
+	background: #999;
+	border: 1px solid #666;
+}
+
+

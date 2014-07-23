@@ -1,0 +1,18 @@
+
+<div class="result">
+	<img src="<%= movie.Poster %>">
+	<div class="text">
+		<h2><%= movie.Title %></h2>
+		<div class="meta">
+			<p><%= movie.Year %> | <%= movie.Genre %> | <%= movie.Rated %></p>
+		</div><!-- /.meta -->
+		<p><%= movie.Plot %></p>
+		
+		<form method="post" action="/favorites">
+			<input type="hidden" name="movie[title]" value="<%= movie.Title %>">
+			<input type="hidden" name="movie[id]" value="<%= movie.imdbID %>">
+			<input type="submit" value="Favorite">
+		</form>
+		
+	</div>
+</div>
