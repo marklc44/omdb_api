@@ -2,6 +2,7 @@ var express = require("express"),
 		ejs = require('ejs'),
 		expressLayouts = require('express-ejs-layouts'),
 		bodyParser = require('body-parser'),
+		methodOverride = require('method-override'),
 		request = require('request');
 
 var app = express();
@@ -78,6 +79,10 @@ app.post('/favorites', function(req, res) {
 
 app.get('/favorites', function(req, res) {
 	res.render('favorites', { faves: favorites });
+});
+
+app.delete('/favorites', function(req, res) {
+
 });
 
 
