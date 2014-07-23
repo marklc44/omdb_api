@@ -37,7 +37,7 @@ var makeRequest = function(type, query, req, res) {
 			if (body.Search) {
 				res.render('results', {
 				movies: body,
-				query: query,
+				query: query || searchQuery,
 				faves: favorites,
 				favLength: favLength()
 			});

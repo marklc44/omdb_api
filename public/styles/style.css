@@ -35,7 +35,7 @@ header {
 	text-indent: none;
 }
 .results li {
-	padding: .25em;
+	padding: .25em .5em;
 	margin-bottom: .25em;
 	background: #ddd;
 }
